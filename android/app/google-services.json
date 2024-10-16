@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "971315453636",
+    "project_id": "timeto-app-2024",
+    "storage_bucket": "timeto-app-2024.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:971315453636:android:a1e14052f1f75533c8f391",
+        "android_client_info": {
+          "package_name": "com.dhrisya.Timeto.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCq19uQwEETimLFSqAYIEXyQV5AWjanqXA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:971315453636:android:b5eeec7e096653c2c8f391",
+        "android_client_info": {
+          "package_name": "com.dhrisya.timeto.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCq19uQwEETimLFSqAYIEXyQV5AWjanqXA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
