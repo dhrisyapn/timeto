@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:timeto/firebase_options.dart';
+import 'package:timeto/signin.dart';
 import 'package:timeto/splash.dart';
 
 Future<void> main() async {
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Color(0xFF2A7A85),
         useMaterial3: true,
       ),
-      home: SplashScreen(),
+      home: SigninPage(),
     );
   }
 }
