@@ -1,4 +1,4 @@
-package com.example.timeto
+package com.dhrisya.timeto.app
 
 import io.flutter.embedding.android.FlutterActivity
 
