@@ -263,6 +263,32 @@ class _AddCourseState extends State<AddCourse> {
                 ),
               ),
             ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height *
+                  0.50, // 10% of screen height
+            ),
+            Container(
+              width: 333,
+              height: 50,
+              decoration: ShapeDecoration(
+                color: Color(0xFF8CC1A9),
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(width: 1, color: Colors.white),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              child: Center(
+                child: Text(
+                  'Create course',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       ),
