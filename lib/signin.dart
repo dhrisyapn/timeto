@@ -69,7 +69,7 @@ class _SigninPageState extends State<SigninPage> {
               height: 5,
             ),
             Container(
-              width: 333,
+              width: double.infinity,
               height: 50,
               decoration: ShapeDecoration(
                 shape: RoundedRectangleBorder(
@@ -112,7 +112,7 @@ class _SigninPageState extends State<SigninPage> {
               height: 5,
             ),
             Container(
-              width: 333,
+              width: double.infinity,
               height: 50,
               decoration: ShapeDecoration(
                 shape: RoundedRectangleBorder(
