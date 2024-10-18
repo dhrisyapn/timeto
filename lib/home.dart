@@ -141,7 +141,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget courses() {
+  Widget courses(String name, String id, String count) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: Container(
@@ -164,7 +164,7 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Course 01',
+                      name,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16,
@@ -173,7 +173,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     Text(
-                      '2 Subjects',
+                      '$count subjects',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 12,
@@ -274,8 +274,53 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: 10,
             ),
-            courses(),
-            courses(),
+            //get name, id, count values from collection users, doc emial, collection course and call courses()
+            StreamBuilder<QuerySnapshot>(
+              stream: FirebaseFirestore.instance
+                  .collection('users')
+                  .doc(email)
+                  .collection('course')
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return FutureBuilder<List<Widget>>(
+                    future: Future.wait(
+                        snapshot.data!.docs.map<Future<Widget>>((doc) async {
+                      String courseId = doc.id;
+                      String courseName = doc['name'];
+                      QuerySnapshot subjectSnapshot = await FirebaseFirestore
+                          .instance
+                          .collection('users')
+                          .doc(email)
+                          .collection('course')
+                          .doc(courseId)
+                          .collection('subject')
+                          .get();
+                      int subjectCount = subjectSnapshot.size;
+
+                      return courses(
+                          courseName, courseId, subjectCount.toString());
+                    }).toList()),
+                    builder: (context, futureSnapshot) {
+                      if (futureSnapshot.connectionState ==
+                          ConnectionState.done) {
+                        return Column(
+                          children: futureSnapshot.data!,
+                        );
+                      } else {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                    },
+                  );
+                } else {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              },
+            ),
             SizedBox(
               height: 10,
             ),
