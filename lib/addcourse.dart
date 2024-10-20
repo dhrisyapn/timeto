@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
 
 class AddCourse extends StatefulWidget {
@@ -10,10 +10,10 @@ class AddCourse extends StatefulWidget {
   State<AddCourse> createState() => _AddCourseState();
 }
 
-class createdsubject {
+class CreatedSubject {
   final String name;
   final String staff;
-  createdsubject(this.name, this.staff);
+  CreatedSubject(this.name, this.staff);
 }
 
 class _AddCourseState extends State<AddCourse> {
@@ -21,9 +21,9 @@ class _AddCourseState extends State<AddCourse> {
   final TextEditingController _courseController = TextEditingController();
   final String email = FirebaseAuth.instance.currentUser!.email!;
   String? _selectedStaff;
-  List<Map<String, dynamic>> _staffData = [];
-  List<createdsubject> createdsubjects = [];
 
+  List<CreatedSubject> createdSubjects = [];
+  List<Map<String, dynamic>> _staffData = [];
   @override
   void initState() {
     super.initState();
@@ -35,8 +35,7 @@ class _AddCourseState extends State<AddCourse> {
     CollectionReference staffCollection =
         firestore.collection('users').doc(email).collection('staff');
 
-    QuerySnapshot querySnapshot =
-        await staffCollection.where('course', isEqualTo: 'no course').get();
+    QuerySnapshot querySnapshot = await staffCollection.get();
 
     List<Map<String, dynamic>> staffData = querySnapshot.docs.map((doc) {
       return {
@@ -61,7 +60,7 @@ class _AddCourseState extends State<AddCourse> {
             width: 333,
             // height: 290,
             decoration: ShapeDecoration(
-              color: Color(0xFF8CC1A9),
+              color: const Color(0xFF8CC1A9),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
@@ -72,7 +71,7 @@ class _AddCourseState extends State<AddCourse> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Center(
+                  const Center(
                     child: Text(
                       'Add New Subject',
                       style: TextStyle(
@@ -82,8 +81,8 @@ class _AddCourseState extends State<AddCourse> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
-                  Text(
+                  const SizedBox(height: 20),
+                  const Text(
                     'Subject name',
                     style: TextStyle(
                       color: Colors.white,
@@ -97,7 +96,7 @@ class _AddCourseState extends State<AddCourse> {
                     height: 50,
                     decoration: ShapeDecoration(
                       shape: RoundedRectangleBorder(
-                        side: BorderSide(width: 1, color: Colors.white),
+                        side: const BorderSide(width: 1, color: Colors.white),
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
@@ -105,24 +104,24 @@ class _AddCourseState extends State<AddCourse> {
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: TextField(
                         controller: _subjectController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           hintText: 'New Subject Name',
                           hintStyle:
                               TextStyle(color: Colors.white, fontSize: 14),
                           border: InputBorder.none,
                         ),
-                        style: TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                         cursorColor: Colors.white,
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Container(
                     width: 293,
                     height: 50,
                     decoration: ShapeDecoration(
                       shape: RoundedRectangleBorder(
-                        side: BorderSide(width: 1, color: Colors.white),
+                        side: const BorderSide(width: 1, color: Colors.white),
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
@@ -141,24 +140,24 @@ class _AddCourseState extends State<AddCourse> {
                             _selectedStaff = newValue;
                           });
                         },
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           hintText: 'Select Staff',
                           hintStyle:
                               TextStyle(color: Colors.white, fontSize: 14),
                           border: InputBorder.none,
                         ),
-                        style: TextStyle(color: Colors.white),
-                        dropdownColor: Color(0xFF8CC1A9),
+                        style: const TextStyle(color: Colors.white),
+                        dropdownColor: const Color(0xFF8CC1A9),
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   GestureDetector(
                     onTap: () {
                       String subjectName = _subjectController.text;
                       if (subjectName.isNotEmpty && _selectedStaff != null) {
-                        createdsubjects
-                            .add(createdsubject(subjectName, _selectedStaff!));
+                        createdSubjects
+                            .add(CreatedSubject(subjectName, _selectedStaff!));
                         _subjectController.clear();
                         Navigator.of(context).pop();
                         setState(() {});
@@ -173,7 +172,7 @@ class _AddCourseState extends State<AddCourse> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           'Add subject',
                           style: TextStyle(
@@ -208,7 +207,7 @@ class _AddCourseState extends State<AddCourse> {
           height: 20,
         ),
         leading: GestureDetector(
-          child: Icon(
+          child: const Icon(
             Icons.arrow_back_ios,
             color: Colors.white,
           ),
@@ -219,7 +218,7 @@ class _AddCourseState extends State<AddCourse> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(
+            const Center(
               child: Text(
                 'Add new course',
                 style: TextStyle(
@@ -230,10 +229,10 @@ class _AddCourseState extends State<AddCourse> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
-            Text(
+            const Text(
               'Course name',
               style: TextStyle(
                 color: Colors.white,
@@ -243,7 +242,7 @@ class _AddCourseState extends State<AddCourse> {
                 height: 0,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Container(
@@ -251,7 +250,7 @@ class _AddCourseState extends State<AddCourse> {
               height: 50,
               decoration: ShapeDecoration(
                 shape: RoundedRectangleBorder(
-                  side: BorderSide(width: 1, color: Colors.white),
+                  side: const BorderSide(width: 1, color: Colors.white),
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
@@ -259,7 +258,7 @@ class _AddCourseState extends State<AddCourse> {
                 controller: _courseController,
                 decoration: InputDecoration(
                   border: InputBorder.none,
-                  contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 10),
                   hintText: 'New course name',
                   hintStyle: TextStyle(
                     color: Colors.white.withOpacity(0.4000000059604645),
@@ -275,10 +274,10 @@ class _AddCourseState extends State<AddCourse> {
                 cursorColor: const Color(0xFFffffff),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            Text(
+            const Text(
               'Subjects',
               style: TextStyle(
                 color: Colors.white,
@@ -287,7 +286,7 @@ class _AddCourseState extends State<AddCourse> {
                 fontWeight: FontWeight.w400,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             GestureDetector(
@@ -297,11 +296,11 @@ class _AddCourseState extends State<AddCourse> {
                 height: 50,
                 decoration: ShapeDecoration(
                   shape: RoundedRectangleBorder(
-                    side: BorderSide(width: 1, color: Color(0xFF8CC1A9)),
+                    side: const BorderSide(width: 1, color: Color(0xFF8CC1A9)),
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                child: Row(
+                child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(
@@ -321,19 +320,20 @@ class _AddCourseState extends State<AddCourse> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             ListView.builder(
               shrinkWrap: true,
-              itemCount: createdsubjects.length,
+              itemCount: createdSubjects.length,
               itemBuilder: (context, index) {
                 return Container(
                   width: double.infinity,
                   height: 50,
                   decoration: ShapeDecoration(
                     shape: RoundedRectangleBorder(
-                      side: BorderSide(width: 1, color: Color(0xFF8CC1A9)),
+                      side:
+                          const BorderSide(width: 1, color: Color(0xFF8CC1A9)),
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
@@ -343,8 +343,8 @@ class _AddCourseState extends State<AddCourse> {
                       Padding(
                         padding: const EdgeInsets.only(left: 10),
                         child: Text(
-                          createdsubjects[index].name,
-                          style: TextStyle(
+                          createdSubjects[index].name,
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 14,
                             fontFamily: 'Poppins',
@@ -357,23 +357,23 @@ class _AddCourseState extends State<AddCourse> {
                         child: Row(
                           children: [
                             Text(
-                              createdsubjects[index].staff,
-                              style: TextStyle(
+                              createdSubjects[index].staff,
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 14,
                                 fontFamily: 'Poppins',
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 20,
                             ),
                             GestureDetector(
                               onTap: () {
-                                createdsubjects.removeAt(index);
+                                createdSubjects.removeAt(index);
                                 setState(() {});
                               },
-                              child: Icon(
+                              child: const Icon(
                                 Icons.delete,
                                 color: Colors.white,
                               ),
@@ -386,7 +386,7 @@ class _AddCourseState extends State<AddCourse> {
                 );
               },
             ),
-            Spacer(),
+            const Spacer(),
             GestureDetector(
               onTap: () {
                 // save _courseController.text to collection users doc email subcollection course
@@ -401,12 +401,12 @@ class _AddCourseState extends State<AddCourse> {
                 courseCollection.add({
                   'name': _courseController.text,
                 }).then((value) {
-                  createdsubjects.forEach((element) {
+                  for (var element in createdSubjects) {
                     courseCollection.doc(value.id).collection('subject').add({
                       'name': element.name,
                       'staff': element.staff,
                     });
-                  });
+                  }
                 });
 
                 Navigator.pop(context);
@@ -415,13 +415,13 @@ class _AddCourseState extends State<AddCourse> {
                 width: double.infinity,
                 height: 50,
                 decoration: ShapeDecoration(
-                  color: Color(0xFF8CC1A9),
+                  color: const Color(0xFF8CC1A9),
                   shape: RoundedRectangleBorder(
-                    side: BorderSide(width: 1, color: Colors.white),
+                    side: const BorderSide(width: 1, color: Colors.white),
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                child: Center(
+                child: const Center(
                   child: Text(
                     'Create course',
                     style: TextStyle(
@@ -434,7 +434,7 @@ class _AddCourseState extends State<AddCourse> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
           ],
